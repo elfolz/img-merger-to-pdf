@@ -56,8 +56,8 @@ function convert() {
 			ctx.drawImage(el.img, 0, 0, el.img.naturalWidth, el.img.naturalHeight, 0, i * 3508, 2480, 3508)
 		})
 		html2pdf().set({
+			filename: 'merged_files',
 			jsPDF: {
-				filename: 'merged_files',
 				compres: true,
 				unit: 'px',
 				format: [2480, 3508],
