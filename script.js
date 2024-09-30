@@ -20,6 +20,16 @@ function drop(e) {
 	}
 }
 
+function loadFiles(e) {
+	files.splice(0)
+	if (!e?.target?.files?.length) {
+		return refresh()
+	}
+	[...e.target.files].forEach(el => {
+		readFile(el)
+	})
+}
+
 function readFile(file) {
 	if (!/image/i.test(file.type)) return
 	const img = new Image()
@@ -70,9 +80,11 @@ function convert() {
 }
 
 function init() {
+	document.querySelector('section').onclick = () => document.querySelector('input[type=file]').click()
 	document.querySelector('button').onclick = () => convert()
 	document.querySelector('section').ondragover = (e) => dragover(e)
 	document.querySelector('section').ondrop = (e) => drop(e)
+	document.querySelector('input[type=file]').oninput = e => loadFiles(e)
 }
 
 document.onreadystatechange = () => {
